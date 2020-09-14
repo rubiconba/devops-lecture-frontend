@@ -1,5 +1,13 @@
-# Builds a react project on every commit, if triggered by a pull request 
-# or a commit to develop branch deploys it to azure storage account 
+# Azure pipeline CI/CD that builds a react project on every commit
+# Commits to master branch deploy it to azure storage account 
+
+# For a simpler execution plan uncomment the following section 
+# to trigger the pipeline only on commits to master branch
+
+trigger:
+  batch: true
+  # branches:
+  #  - master
 
 stages:
 

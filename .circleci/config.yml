@@ -1,3 +1,6 @@
+# CircleCI pipleline that builds a react project on every commit
+# Commits to master branch deploy it to azure storage account 
+
 version: 2.1
 
 orbs:
@@ -51,7 +54,7 @@ jobs:
       
 
   deploy-to-azure:
-    machine: # executor type
+    machine:
       image: ubuntu-1604:201903-01 
 
     steps:
@@ -75,6 +78,12 @@ workflows:
     build-test-deploy:
       jobs:
         - build-and-test
+        # For a simpler execution plan uncomment the following section 
+        # to trigger the pipeline only on commits to master branch
+
+          # filters:
+              # branches:
+                # only: master
         - deploy-to-azure:
             requires:
               - build-and-test

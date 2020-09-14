@@ -1,3 +1,6 @@
+# Gitlab CI pipleline that builds a react project on every commit
+# Commits to master branch deploy it to azure storage account 
+
 stages:
   - build-and-test
   - deploy
@@ -13,6 +16,10 @@ build-and-test:
   artifacts:
     paths:
       - build/
+  # For a simpler execution plan uncomment the following section 
+  # to trigger the pipeline only on commits to master branch
+  # only:
+  #  - master
 
 deploy:
   stage: deploy
