@@ -1,0 +1,27 @@
+stages:
+  - build-and-test
+  - deploy
+
+build-and-test:
+  stage: build-and-test
+  image: node:latest
+  script:
+    - npm ci
+    - npm run test
+    - npm run lint
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+
+deploy:
+  stage: deploy
+  image:  microsoft/azure-cli
+  script:
+    - az storage blob delete-batch -s "\$web" --connection-string $CONNECTION_STRING
+    - az storage blob upload-batch -d "\$web" -s build --connection-string $CONNECTION_STRING
+
+  dependencies:
+    - build-and-test
+  only:
+    - master
