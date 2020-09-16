@@ -70,9 +70,7 @@ jobs:
 
         - name: Upload To Azure Blob Storage
           uses: bacongobbler/azure-blob-storage-upload@v1.0.0
-          env:
-            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
           with:
             source_dir: react-github-actions-build
             container_name: $web
-            connection_string: $CONNECTION_STRING
+            connection_string: ${{ secrets.CONNECTION_STRING }}
